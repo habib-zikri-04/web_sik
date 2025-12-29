@@ -3,7 +3,7 @@
         <div class="max-w-7xl mx-auto">
             <h1 class="text-2xl font-bold mb-4">Dashboard Siswa</h1>
 
-            <p>Halo, {{ auth()->user()->name }}. Anda masuk sebagai <strong>Siswa</strong>.</p>
+            <p>Halo, {{ auth()->user()->name }}. Anda masuk sebagai <strong>Santri</strong>.</p>
         </div>
     </div>
 </x-app-layout>
