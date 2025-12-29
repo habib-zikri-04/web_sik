@@ -36,7 +36,8 @@ class DatabaseSeeder extends Seeder
         SantrisSeeder::class,
         CivitasSeeder::class,
         JadwalsSeeder::class,
-        AbsensiSeeder::class
+        AbsensiSeeder::class,
+        NilaiSantriSeeder::class,
         ]);
 
     }

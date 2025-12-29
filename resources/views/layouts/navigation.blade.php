@@ -28,6 +28,10 @@
                         <x-nav-link :href="route('admin.rekap-absensi')" :active="request()->routeIs('admin.rekap-absensi')">
                             {{ __('Rekap Absensi') }}
                         </x-nav-link>
+                        <x-nav-link :href="route('admin.rekap-nilai')" :active="request()->routeIs('admin.rekap-nilai')">
+                            {{ __('Rekap Nilai') }}
+                        </x-nav-link>
+
 
                     @elseif ($role === 'guru')
                         <x-nav-link :href="route('guru.dashboard')" :active="request()->routeIs('guru.dashboard')">
@@ -35,6 +39,9 @@
                         </x-nav-link>
                         <x-nav-link :href="route('presensi.scan')" :active="request()->routeIs('presensi.scan')">
                             {{ __('Presensi') }}
+                        </x-nav-link>
+                        <x-nav-link :href="route('guru.santri')" :active="request()->routeIs('guru.santri')">
+                            {{ __('Santri') }}
                         </x-nav-link>
 
                         {{-- menu khusus guru bisa di sini --}}
@@ -45,6 +52,13 @@
                         <x-nav-link :href="route('presensi.scan')" :active="request()->routeIs('presensi.scan')">
                             {{ __('Presensi') }}
                         </x-nav-link>
+                        <x-nav-link :href="route('santri.nilai')" :active="request()->routeIs('santri.nilai')">
+                            {{ __('Nilai') }}
+                        </x-nav-link>
+
+
+
+
                     @elseif ($role === 'civitas')
                         <x-nav-link :href="route('civitas.dashboard')" :active="request()->routeIs('civitas.dashboard')">
                             {{ __('Dashboard') }}

@@ -7,6 +7,13 @@ use App\Http\Controllers\AdminDashboardController;
 use App\Http\Controllers\AdminPresensiController;
 use App\Http\Controllers\SantriPresensiController;
 use App\Http\Controllers\Admin\RekapAbsensiController;
+use App\Http\Controllers\SantriDashboardController;
+use App\Http\Controllers\GuruDashboardController;
+use App\Http\Controllers\GuruSantriController;
+use App\Http\Controllers\GuruNilaiController;
+use App\Http\Controllers\Admin\RekapNilaiController;
+use App\Http\Controllers\SantriNilaiController;
+
 
 use App\Http\Controllers\PresensiController;
 use Illuminate\Http\Request;
@@ -50,19 +57,44 @@ Route::middleware(['auth', 'verified', 'role:admin'])->group(function () {
 
 });
 
+Route::middleware(['auth', 'verified', 'role:admin'])->group(function () {
+
+    Route::get('/admin/rekap-nilai',
+        [RekapNilaiController::class, 'index']
+    )->name('admin.rekap-nilai');
+
+    Route::get('/admin/rekap-nilai/pdf',
+        [RekapNilaiController::class, 'downloadPdf']
+    )->name('admin.rekap-nilai.pdf');
+
+});
+
 // GURU
 Route::middleware(['auth', 'verified', 'role:guru'])->group(function () {
-    Route::get('/guru/dashboard', function () {
-        return view('guru.dashboard');
-    })->name('guru.dashboard');
+    Route::get('/guru/dashboard', [GuruDashboardController::class, 'index'])
+        ->name('guru.dashboard');
+    Route::get('/guru/santri', [GuruSantriController::class, 'index'])
+        ->name('guru.santri');
+    // ✅ NILAI HARUS PAKAI JADWAL
+    Route::get('/guru/nilai/{jadwal_id}', [GuruNilaiController::class, 'index'])
+        ->name('guru.nilai');
+
+    Route::post('/guru/nilai/simpan', [GuruNilaiController::class, 'store'])
+        ->name('guru.nilai.store');
 });
 
 // SANTRI
 Route::middleware(['auth', 'verified', 'role:santri'])->group(function () {
+    Route::get('/santri/dashboard', [SantriDashboardController::class, 'index'])
+        ->name('santri.dashboard');
+});
 
-    Route::get('/santri/dashboard', function () {
-        return view('santri.dashboard');
-    })->name('santri.dashboard');
+Route::middleware(['auth', 'verified', 'role:santri'])->group(function () {
+    Route::get('/santri/nilai', [SantriNilaiController::class, 'index'])
+        ->name('santri.nilai');
+
+    Route::get('/santri/sertifikat/{subject}', [SantriNilaiController::class, 'downloadSertifikat'])
+        ->name('santri.sertifikat');
 });
 
 

@@ -134,7 +134,7 @@ class JadwalsSeeder extends Seeder
         // Dokumen ditandatangani 25 Agustus 2025 → Rabu terdekat setelah itu: 27 Agustus 2025
         // =========================
         // $start = Carbon::create(2025, 8, 27); // Rabu
-        $start = Carbon::create(2025, 12, 28); //test hari ini
+        $start = Carbon::create(2025, 12, 30); //test hari ini
         $dates = [];
         for ($i = 0; $i < 16; $i++) {
             $dates[] = $start->copy()->addWeeks($i)->toDateString();

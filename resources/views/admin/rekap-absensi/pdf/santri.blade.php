@@ -10,7 +10,7 @@
 </head>
 <body>
 
-<h2>Rekap Absensi Santri Per Subject</h2>
+<h2>Rekap Absensi Santri </h2>
 
 <table>
     <thead>
@@ -30,8 +30,9 @@
             <td>{{ $r['subject'] }}</td>
             <td>{{ $r['hadir'] }}</td>
             <td>{{ $r['total'] }}</td>
-            <td>{{ $r['persentase'] }}%</td>
-            <td>{{ $r['status_ujian'] }}</td>
+            <td>{{ $r['persen'] }}%</td>
+            <td>{{ $r['status'] }}</td>
+
         </tr>
         @endforeach
     </tbody>

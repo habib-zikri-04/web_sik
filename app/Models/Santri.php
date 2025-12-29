@@ -34,8 +34,9 @@ class Santri extends Model
     }
 
     public function nilai()
-    {
-        return $this->hasMany(Nilai::class, 'id_santri');
-    }
+{
+    return $this->hasMany(NilaiSantri::class);
+}
+
 
 }
