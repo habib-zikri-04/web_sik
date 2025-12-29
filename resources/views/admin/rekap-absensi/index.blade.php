@@ -4,7 +4,7 @@
 
         <div class="space-y-3">
             <a href="{{ route('admin.rekap-absensi.pdf', 'santri') }}"
-               class="block px-4 py-2 bg-green-600 text-white rounded text-center">
+               class="block px-4 py-2 bg-lime-900 text-white rounded text-center">
                 Unduh PDF Rekap Santri
             </a>
 
