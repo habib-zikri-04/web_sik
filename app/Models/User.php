@@ -25,30 +25,26 @@ class User extends Authenticatable
     ];
 
     // helper biar enak dipakai di blade / controller
-    public function isAdmin(): bool
+    public function santri()
+{
+    return $this->hasOne(\App\Models\Santri::class);
+}
+
+public function pengajar()
+{
+    return $this->hasOne(\App\Models\Pengajar::class);
+}
+
+public function civitas()
+{
+    return $this->hasOne(\App\Models\Civitas::class);
+}
+
+public function absensis()
     {
-        return $this->role === 'admin';
+        return $this->hasMany(Absensi::class, 'user_id');
     }
 
-    public function isGuru(): bool
-    {
-        return $this->role === 'guru';
-    }
-
-    public function isSiswa(): bool
-    {
-        return $this->role === 'siswa';
-    }
-
-    public function isSema(): bool
-    {
-        return $this->role === 'sema';
-    }
-
-    public function isDema(): bool
-    {
-        return $this->role === 'dema';
-    }
 
     /**
      * The attributes that should be hidden for serialization.

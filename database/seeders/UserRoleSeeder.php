@@ -2,9 +2,9 @@
 
 namespace Database\Seeders;
 
+use App\Models\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
-use App\Models\User;
 
 class UserRoleSeeder extends Seeder
 {
@@ -14,50 +14,58 @@ class UserRoleSeeder extends Seeder
         User::updateOrCreate(
             ['email' => 'admin@example.com'],
             [
-                'name' => 'Admin Utama',
+                'name' => 'Admin',
                 'password' => Hash::make('password'),
                 'role' => 'admin',
             ]
         );
 
-        // GURU
-        User::updateOrCreate(
-            ['email' => 'guru@example.com'],
-            [
-                'name' => 'Guru Satu',
-                'password' => Hash::make('password'),
-                'role' => 'guru',
-            ]
-        );
+        // // GURU
+        // User::updateOrCreate(
+        //     ['email' => 'guru1@example.com'],
+        //     [
+        //         'name' => 'Guru 1',
+        //         'password' => Hash::make('password'),
+        //         'role' => 'guru',
+        //     ]
+        // );
 
-        // SISWA
-        User::updateOrCreate(
-            ['email' => 'siswa@example.com'],
-            [
-                'name' => 'Siswa Contoh',
-                'password' => Hash::make('password'),
-                'role' => 'siswa',
-            ]
-        );
+        // User::updateOrCreate(
+        //     ['email' => 'guru2@example.com'],
+        //     [
+        //         'name' => 'Guru 2',
+        //         'password' => Hash::make('password'),
+        //         'role' => 'guru',
+        //     ]
+        // );
 
-        // SEMA
-        User::updateOrCreate(
-            ['email' => 'sema@example.com'],
-            [
-                'name' => 'Ketua SEMA',
-                'password' => Hash::make('password'),
-                'role' => 'sema',
-            ]
-        );
+        // // SANTRI
+        // User::updateOrCreate(
+        //     ['email' => 'santri1@example.com'],
+        //     [
+        //         'name' => 'Santri 1',
+        //         'password' => Hash::make('password'),
+        //         'role' => 'santri',
+        //     ]
+        // );
 
-        // DEMA
-        User::updateOrCreate(
-            ['email' => 'dema@example.com'],
-            [
-                'name' => 'Ketua DEMA',
-                'password' => Hash::make('password'),
-                'role' => 'dema',
-            ]
-        );
+        // User::updateOrCreate(
+        //     ['email' => 'santri2@example.com'],
+        //     [
+        //         'name' => 'Santri 2',
+        //         'password' => Hash::make('password'),
+        //         'role' => 'santri',
+        //     ]
+        // );
+
+        // // CIVITAS
+        // User::updateOrCreate(
+        //     ['email' => 'civitas1@example.com'],
+        //     [
+        //         'name' => 'Civitas 1',
+        //         'password' => Hash::make('password'),
+        //         'role' => 'civitas',
+        //     ]
+        // );
     }
 }

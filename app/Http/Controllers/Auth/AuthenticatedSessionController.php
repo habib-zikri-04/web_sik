@@ -38,8 +38,8 @@ class AuthenticatedSessionController extends Controller
         return redirect()->route('guru.dashboard');
     }
 
-    if ($user->role === 'siswa') {
-        return redirect()->route('siswa.dashboard');
+    if ($user->role === 'santri') {
+        return redirect()->route('santri.dashboard');
     }
 
     if ($user->role === 'sema') {
@@ -50,7 +50,7 @@ class AuthenticatedSessionController extends Controller
         return redirect()->route('dema.dashboard');
     }
 
-    return redirect()->route('dashboard'); // fallback
+    return redirect('/');
 }
 
 
