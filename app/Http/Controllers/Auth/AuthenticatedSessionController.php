@@ -42,8 +42,8 @@ class AuthenticatedSessionController extends Controller
         return redirect()->route('santri.dashboard');
     }
 
-    if ($user->role === 'sema') {
-        return redirect()->route('sema.dashboard');
+    if ($user->role === 'civitas') {
+        return redirect()->route('civitas.dashboard');
     }
 
     if ($user->role === 'dema') {
