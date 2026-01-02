@@ -16,7 +16,7 @@ class Santri extends Model
         'no_hp',
         'alamat',
         'jenis_kelamin',
-        'id_kelas',
+        'kelas_id',
     ];
 
     public function user()
