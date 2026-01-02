@@ -18,7 +18,7 @@
                 <span class="font-semibold">{{ $jadwal->subject->nama ?? '-' }}</span><br>
 
                 Pengajar:
-                <span class="font-semibold">{{ $jadwal->pengajar->nama ?? '-' }}</span><br>
+                <span class="font-semibold">{{ $jadwal->pengajar->nama ?? 'Bersama-sama' }}</span><br>
 
                 Waktu:
                 <span class="font-semibold">
@@ -27,9 +27,15 @@
             </p>
 
             <div class="flex flex-col items-center">
-                <div class="bg-white p-4 rounded-2xl shadow">
+                {{-- Container QR dengan ID unik untuk auto-refresh --}}
+                <div id="qr-container-{{ $jadwal->id }}" class="bg-white p-4 rounded-2xl shadow" data-jadwal-id="{{ $jadwal->id }}">
                     {!! $qrs[$jadwal->id] !!}
                 </div>
+
+                {{-- Timer Countdown (Optional) --}}
+                <p id="timer-{{ $jadwal->id }}" class="mt-2 text-xs font-mono text-red-500">
+                    Refresh in: 10:00
+                </p>
 
                 <p class="mt-3 text-xs text-gray-500 text-center">
                     Scan QR ini untuk presensi sesi ini
@@ -52,4 +58,41 @@
 
         </div>
     </div>
+
+    {{-- Script untuk Auto-Refresh QR Code --}}
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const qrContainers = document.querySelectorAll('[data-jadwal-id]');
+
+            qrContainers.forEach(container => {
+                const jadwalId = container.dataset.jadwalId;
+                const timerElement = document.getElementById(`timer-${jadwalId}`);
+                let timeLeft = 600; // 10 menit (detik)
+
+                // Fungsi hitung mundur tampilan
+                setInterval(() => {
+                    if (timeLeft > 0) {
+                        timeLeft--;
+                        const m = Math.floor(timeLeft / 60).toString().padStart(2, '0');
+                        const s = (timeLeft % 60).toString().padStart(2, '0');
+                        if (timerElement) timerElement.innerText = `Refresh in: ${m}:${s}`;
+                    }
+                }, 1000);
+
+                // Fungsi refresh QR dari server setiap 10 menit
+                setInterval(() => {
+                    fetch(`/admin/presensi/qr/${jadwalId}`)
+                        .then(response => response.json())
+                        .then(data => {
+                            // Update QR Code SVG
+                            container.innerHTML = data.qr_code;
+                            // Reset timer
+                            timeLeft = 600; 
+                            console.log(`QR Code for Jadwal ${jadwalId} refreshed.`);
+                        })
+                        .catch(err => console.error('Gagal refresh QR:', err));
+                }, 600000); // 10 menit (600,000 ms)
+            });
+        });
+    </script>
 </x-app-layout>
