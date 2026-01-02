@@ -10,6 +10,8 @@ class Jadwal extends Model
         'sesi',
         'subject_id',
         'pengajar_id',
+        'kelas_id',
+        'ruang',
         'tanggal',
         'jam_mulai',
         'jam_selesai',
