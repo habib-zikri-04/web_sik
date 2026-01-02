@@ -10,6 +10,21 @@
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
 
+    {{-- Prevent layout shift from scrollbar --}}
+    <style>
+        html {
+            overflow-y: scroll;
+            scrollbar-gutter: stable;
+        }
+        body {
+            min-height: 100vh;
+        }
+        /* Smooth page transitions */
+        .min-h-screen {
+            min-height: 100vh;
+        }
+    </style>
+
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 
@@ -37,5 +52,6 @@
         @include('layouts.footer')
 
     </div>
+    @stack('scripts')
 </body>
 </html>
