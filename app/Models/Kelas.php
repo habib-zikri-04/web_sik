@@ -7,11 +7,17 @@ use Illuminate\Database\Eloquent\Model;
 class Kelas extends Model
 {
     protected $fillable = [
-        'nama_kelas',
-        'angkatan',
+        'nama',
+        'kode',
+        'pengajar_id',
     ];
 
     protected $table = 'kelas';
+
+    public function pengajar()
+    {
+        return $this->belongsTo(Pengajar::class);
+    }
 
     public function santris()
     {
@@ -22,5 +28,5 @@ class Kelas extends Model
     {
         return $this->hasMany(Jadwal::class, 'kelas_id');
     }
-
 }
+
