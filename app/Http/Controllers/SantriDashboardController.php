@@ -18,14 +18,23 @@ class SantriDashboardController extends Controller
          | 1. JADWAL (untuk card)
          ========================= */
         $jadwals = Jadwal::with(['subject', 'kelas'])
-    ->where(function ($q) use ($santri) {
-        $q->whereNull('kelas_id')
-          ->orWhere('kelas_id', $santri->kelas_id);
-    })
-    ->orderBy('jam_mulai')
-    ->get()
-    ->unique('subject_id')   // 🔥 ini kuncinya
-    ->take(4);               // 🔥 batasi 4 card saja
+            ->where(function ($q) use ($santri) {
+                $q->whereNull('kelas_id')
+                ->orWhere('kelas_id', $santri->kelas_id)
+                ->orWhere('kelas_id', 14); // ID untuk kelas 'Semua'
+            })
+            ->orderBy('jam_mulai')
+            ->get()
+            ->unique('subject_id')   // 🔥 ini kuncinya
+            ->take(4);               // 🔥 batasi 4 card saja
+
+        // Check if there's any schedule FOR TODAY
+        $adaJadwalHariIni = Jadwal::where('tanggal', now()->toDateString())
+            ->where(function ($q) use ($santri) {
+                $q->whereNull('kelas_id')
+                ->orWhere('kelas_id', $santri->kelas_id)
+                ->orWhere('kelas_id', 14);
+            })->exists();
 
 
         /* =========================
@@ -71,6 +80,6 @@ class SantriDashboardController extends Controller
             ];
         }
 
-        return view('santri.dashboard', compact('jadwals', 'rekap'));
+        return view('santri.dashboard', compact('jadwals', 'rekap', 'adaJadwalHariIni'));
     }
 }
