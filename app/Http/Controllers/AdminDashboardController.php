@@ -6,34 +6,26 @@ use App\Models\Santri;
 use App\Models\Pengajar;
 use App\Models\Civitas;
 use App\Models\Absensi;
+use Illuminate\Http\Request;
 
 class AdminDashboardController extends Controller
 {
     public function index()
     {
-        // --- JADWAL KEGIATAN (STATIC) ---
-        $jadwal = [
-            [
-                'judul'      => 'Sesi Mengaji',
-                'waktu'      => '08.00 – 09.00 WIB',
-                'keterangan' => 'Santri, Civitas, dan Ormawa',
-            ],
-            [
-                'judul'      => 'Sesi Kelas 1',
-                'waktu'      => '09.00 – 11.00 WIB',
-                'keterangan' => 'Pembelajaran',
-            ],
-            [
-                'judul'      => 'Sesi Kelas 2',
-                'waktu'      => '11.00 – 13.00 WIB',
-                'keterangan' => 'Pembelajaran',
-            ],
-            [
-                'judul'      => 'Sesi Kelas 3',
-                'waktu'      => '13.00 – 16.00 WIB',
-                'keterangan' => 'Pembelajaran',
-            ],
-        ];
+        // --- JADWAL KEGIATAN (REAL DATA) ---
+        $jadwalRaw = \App\Models\Jadwal::with(['subject', 'kelas', 'pengajar'])
+            ->orderBy('tanggal', 'desc')
+            ->orderBy('jam_mulai', 'asc')
+            ->take(4)
+            ->get();
+
+        $jadwal = $jadwalRaw->map(function($j) {
+            return [
+                'judul'      => ($j->subject->nama ?? 'Kegiatan') . ' - ' . ($j->kelas->nama ?? 'Semua'),
+                'waktu'      => \Carbon\Carbon::parse($j->tanggal)->translatedFormat('l, d M') . ' (' . substr($j->jam_mulai, 0, 5) . ' - ' . substr($j->jam_selesai, 0, 5) . ')',
+                'keterangan' => $j->ruang ?? 'Ruang Belum Ditentukan',
+            ];
+        })->toArray();
 
         // --- TOTAL DATA ---
         $totalSantri  = Santri::count();
@@ -65,3 +57,4 @@ class AdminDashboardController extends Controller
         ));
     }
 }
+
