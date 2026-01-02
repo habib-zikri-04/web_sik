@@ -7,6 +7,7 @@ use App\Models\Jadwal;
 use App\Models\NilaiSantri;
 use App\Models\Subject;
 use Barryvdh\DomPDF\Facade\Pdf;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class SantriNilaiController extends Controller
@@ -69,7 +70,7 @@ class SantriNilaiController extends Controller
 
         return view('santri.nilai.index', compact('data'));
     }
-    public function downloadSertifikat(Subject $subject)
+    public function downloadSertifikat(Request $request, Subject $subject)
 {
     $santri = Auth::user()->santri;
 
@@ -79,7 +80,11 @@ class SantriNilaiController extends Controller
     $pdf = Pdf::loadView('santri.sertifikat.pdf', compact(
         'santri',
         'subject'
-    ));
+    ))->setPaper('a4', 'landscape'); // Sertifikat biasanya landscape
+
+    if ($request->has('stream')) {
+        return $pdf->stream('sertifikat-'.$subject->kode.'.pdf');
+    }
 
     return $pdf->download(
         'sertifikat-'.$subject->kode.'.pdf'
