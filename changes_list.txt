@@ -1,0 +1,80 @@
+ M .env.example
+ M app/Http/Controllers/Admin/AdminDashboardController.php
+ M app/Http/Controllers/Admin/RekapAbsensiController.php
+ M app/Http/Controllers/Admin/RekapNilaiController.php
+ M app/Http/Controllers/AdminDashboardController.php
+ M app/Http/Controllers/AdminPresensiController.php
+ M app/Http/Controllers/Auth/AuthenticatedSessionController.php
+ M app/Http/Controllers/GuruDashboardController.php
+ M app/Http/Controllers/PresensiController.php
+ M app/Http/Controllers/ProfileController.php
+ M app/Http/Controllers/SantriDashboardController.php
+ M app/Http/Controllers/SantriNilaiController.php
+ M app/Models/Jadwal.php
+ M app/Models/Kelas.php
+ M app/Models/Pengajar.php
+ M app/Models/Santri.php
+ M bootstrap/app.php
+ M config/database.php
+ M package-lock.json
+ M resources/views/admin/dashboard.blade.php
+ M resources/views/admin/presensi/index.blade.php
+ M resources/views/admin/rekap-absensi/index.blade.php
+ M resources/views/admin/rekap-nilai/index.blade.php
+ M resources/views/auth/confirm-password.blade.php
+ M resources/views/auth/login.blade.php
+ M resources/views/auth/register.blade.php
+ M resources/views/auth/reset-password.blade.php
+ M resources/views/civitas/dashboard.blade.php
+ M resources/views/components/nav-link.blade.php
+ M resources/views/components/responsive-nav-link.blade.php
+ M resources/views/dema/dashboard.blade.php
+ M resources/views/guru/dashboard.blade.php
+ M resources/views/guru/nilai/index.blade.php
+ M resources/views/guru/santri.blade.php
+ M resources/views/layouts/app.blade.php
+ M resources/views/layouts/footer.blade.php
+ M resources/views/layouts/guest.blade.php
+ M resources/views/layouts/navigation.blade.php
+ M resources/views/presensi/scan.blade.php
+ M resources/views/profile/edit.blade.php
+ M resources/views/profile/partials/delete-user-form.blade.php
+ M resources/views/profile/partials/update-password-form.blade.php
+ M resources/views/profile/partials/update-profile-information-form.blade.php
+ M resources/views/santri/dashboard.blade.php
+ M resources/views/santri/nilai/index.blade.php
+ M resources/views/santri/sertifikat/pdf.blade.php
+ M resources/views/welcome.blade.php
+ M routes/web.php
+ M vercel.json
+?? app/Http/Controllers/Admin/JadwalController.php
+?? app/Http/Controllers/Admin/KelasController.php
+?? app/Http/Controllers/Admin/UserController.php
+?? app/Http/Controllers/CivitasDashboardController.php
+?? app/Http/Controllers/CivitasPresensiController.php
+?? app/Http/Controllers/DemaDashboardController.php
+?? app/Http/Controllers/DemaPresensiController.php
+?? app/Http/Controllers/GuruPresensiController.php
+?? app/Http/Controllers/PengaduanController.php
+?? app/Models/Pengaduan.php
+?? changes_list.txt
+?? database/migrations/2025_12_30_170742_create_pengaduans_table.php
+?? database/migrations/2025_12_31_103000_add_pengajar_to_kelas_table.php
+?? database/migrations/2026_01_01_135330_add_profile_photo_to_users_table.php
+?? docs/
+?? public/asset/
+?? public/images/berita.png
+?? public/images/fix.jpg
+?? public/images/hero-image.jpg
+?? public/images/login-bg.jpg
+?? public/images/rifki.jpg
+?? public/images/sertifikat-bg.png
+?? resources/views/admin/jadwal/
+?? resources/views/admin/kelas/
+?? resources/views/admin/users/
+?? resources/views/civitas/presensi.blade.php
+?? resources/views/components/password-input.blade.php
+?? resources/views/dema/presensi.blade.php
+?? resources/views/guru/presensi/
+?? resources/views/pengaduan/
+?? resources/views/presensi/not-today.blade.php
