@@ -37,10 +37,17 @@ class RekapAbsensiController extends Controller
         ));
     }
 
-    public function downloadPdf(string $role)
+    public function downloadPdf(Request $request, string $role)
 {
     $subjects = Subject::all();
     $rekap = [];
+
+    // ... (rest of the logic remains same, just need to update signature and return)
+    // Actually I need to check where to put the return.
+    // The role logic is long, I should only change the tail returns.
+    // Wait, let's just do it for the whole method or specific parts.
+    
+    // I will replace only the return statements for each role.
 
     // ================= SANTRI =================
     if ($role === 'santri') {
@@ -89,6 +96,9 @@ class RekapAbsensiController extends Controller
         }
 
         $pdf = Pdf::loadView('admin.rekap-absensi.pdf.santri', compact('rekap'));
+        if ($request->has('stream')) {
+            return $pdf->stream('rekap-santri-per-subject.pdf');
+        }
         return $pdf->download('rekap-santri-per-subject.pdf');
     }
 
@@ -160,6 +170,9 @@ class RekapAbsensiController extends Controller
             compact('rekap')
         )->setPaper('a4', 'portrait');
 
+        if ($request->has('stream')) {
+            return $pdf->stream('rekap-guru-per-kelas.pdf');
+        }
         return $pdf->download('rekap-guru-per-kelas.pdf');
     }
 
@@ -210,6 +223,9 @@ class RekapAbsensiController extends Controller
         compact('rekap')
     )->setPaper('a4', 'portrait');
 
+    if ($request->has('stream')) {
+        return $pdf->stream('rekap-civitas.pdf');
+    }
     return $pdf->download('rekap-civitas.pdf');
 }
 
